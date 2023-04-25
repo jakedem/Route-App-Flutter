@@ -20,6 +20,7 @@ class _MapScreenState extends State<MapScreen> {
   LatLng _currentLocation = LatLng(5.6037, -0.1870); // Accra, Ghana
   String _currentAddress = '';
   List<Marker> markers = [];
+  List<LatLng> points = [];
 
   @override
   void initState() {
@@ -47,6 +48,8 @@ class _MapScreenState extends State<MapScreen> {
         ),
       );
       _getAddressFromLatLng();
+      // add current location to points list
+      points.add(_currentLocation);
     });
   }
 
@@ -86,6 +89,15 @@ class _MapScreenState extends State<MapScreen> {
                   urlTemplate:
                       'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                   subdomains: ['a', 'b', 'c'],
+                ),
+                PolylineLayer(
+                  polylines: [
+                    Polyline(
+                      points: points, // pass the points list to the polyline
+                      color: Colors.blue,
+                      strokeWidth: 3.0,
+                    ),
+                  ],
                 ),
               ],
             ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:routeapp/authentication_dir/sign_in_screen.dart';
-import 'package:routeapp/routes_dir/map.dart';
+//import 'package:routeapp/routes_dir/map.dart';
+import 'package:routeapp/routes_dir/map_google.dart';
 
 bool _obscureText = true;
 
@@ -116,7 +117,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MapScreen()),
+                                builder: (context) => MapGoogleScreen()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
