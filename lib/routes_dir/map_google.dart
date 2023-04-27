@@ -1,128 +1,87 @@
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'dart:async';
+import 'package:geocoding/geocoding.dart';
+import 'package:routeapp/routes_dir/location_service.dart';
+import 'package:routeapp/routes_dir/get_current_location.dart';
+import 'package:geolocator/geolocator.dart';
 
-import 'package:routeapp/authentication_dir/location_service.dart';
-
-class MapGoogleScreen extends StatefulWidget {
-  const MapGoogleScreen({Key? key}) : super(key: key);
-
+class ParisMap extends StatefulWidget {
   @override
-  _MapGoogleScreenState createState() => _MapGoogleScreenState();
+  _ParisMapState createState() => _ParisMapState();
 }
 
-class _MapGoogleScreenState extends State<MapGoogleScreen> {
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
-  TextEditingController _searchController = TextEditingController();
+class _ParisMapState extends State<ParisMap> {
+  late GoogleMapController mapController;
 
-  static final CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
+  static const LatLng _center = const LatLng(5.1053, -1.2464);
 
-  static final Marker _kGooglePlexMarker = Marker(
-    markerId: MarkerId('_kGooglePlexMarker'),
-    infoWindow: InfoWindow(title: 'Google Plex'),
-    icon: BitmapDescriptor.defaultMarker,
-    position: LatLng(37.42796133580664, -122.085749655962),
-  );
+  String searchQuery = '';
 
-  static final CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
+  //void _onMapCreated(GoogleMapController controller) {
+  //mapController = controller;
+  //}
 
-  static final Marker _kLakePlexMarker = Marker(
-    markerId: MarkerId('_kLakePlexMarker'),
-    infoWindow: InfoWindow(title: 'Lake Plex'),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
-    position: LatLng(37.43296265331129, -122.08832357078792),
-  );
+  void _onMapCreated(GoogleMapController controller) async {
+    mapController = controller;
 
-  static final Polyline _kPolyline = Polyline(
-    polylineId: PolylineId('_kPolyline'),
-    points: [
-      LatLng(37.42796133580664, -122.085749655962),
-      LatLng(37.43296265331129, -122.08832357078792),
-    ],
-    width: 5,
-  );
+    // Get user's current location
+    Position position = await LocationService.getCurrentLocation();
 
-  static final Polygon _kPolygon = Polygon(
-    polygonId: PolygonId('_kPolygon'),
-    points: [
-      LatLng(37.42796133580664, -122.085749655962),
-      LatLng(37.43296265331129, -122.08832357078792),
-      LatLng(37.418, -122.092),
-      LatLng(37.4335, -122.092),
-    ],
-    strokeWidth: 5,
-    fillColor: Colors.transparent,
-  );
+    // Move camera to user's current location
+    LatLng latLng = LatLng(position.latitude, position.longitude);
+    mapController.animateCamera(CameraUpdate.newLatLngZoom(latLng, 15));
+  }
+
+  void _searchLocation(String searchQuery) {
+    searchLocationAndMoveCamera(searchQuery, mapController);
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Google Maps'),
-      ),
-      body: Column(
-        children: [
-          Row(
-            children: [
-              Expanded(
-                  child: TextFormField(
-                controller: _searchController,
-                textCapitalization: TextCapitalization.words,
-                decoration: InputDecoration(hintText: 'Search by City'),
-                onChanged: (value) {
-                  print(value);
-                },
-              )),
-              IconButton(
-                onPressed: () async {
-                  var place =
-                      await LocationService().getPlace(_searchController.text);
-                  _goToPlace(place);
-                },
-                icon: Icon(Icons.search),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Stack(
+          children: [
+            GoogleMap(
+              onMapCreated: _onMapCreated,
+              initialCameraPosition: CameraPosition(
+                target: _center,
+                zoom: 15.0,
               ),
-            ],
-          ),
-          Expanded(
-            child: GoogleMap(
-              mapType: MapType.normal,
-              markers: {
-                _kGooglePlexMarker, //_kLakePlexMarker,
-              },
-              //polylines: {_kPolyline},
-              //polygons: {_kPolygon},
-              initialCameraPosition: _kGooglePlex,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
             ),
-          ),
-        ],
-      ),
-      //floatingActionButton: FloatingActionButton.extended(
-      //  onPressed: _goToTheLake,
-      //  label: const Text('To the lake!'),
-      //  icon: const Icon(Icons.directions_boat),
-      // ),
-    );
-  }
-
-  Future<void> _goToPlace(Map<String, dynamic> place) async {
-    final double lat = place['geometry']['location']['lat'];
-    final double lng = place['geometry']['location']['lng'];
-
-    final GoogleMapController controller = await _controller.future;
-    controller.animateCamera(
-      CameraUpdate.newCameraPosition(
-        CameraPosition(target: LatLng(lat, lng), zoom: 14.0),
+            Positioned(
+              top: 70,
+              left: 50,
+              right: 50,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    hintText: 'Search Location',
+                    fillColor: Colors.white,
+                    filled: true,
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(30.0),
+                      borderSide: BorderSide.none,
+                    ),
+                    contentPadding: EdgeInsets.symmetric(horizontal: 15.0),
+                    prefixIcon: IconButton(
+                      icon: Icon(Icons.search),
+                      onPressed: () {
+                        _searchLocation(searchQuery);
+                      },
+                    ),
+                  ),
+                  onChanged: (value) {
+                    searchQuery = value;
+                  },
+                  onSubmitted: _searchLocation,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

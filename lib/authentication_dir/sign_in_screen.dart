@@ -24,7 +24,7 @@ class _SignInScreenState extends State<SignInScreen> {
         appBar: AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: const Color.fromARGB(255, 0, 86, 79),
-          //title: const Text('Homepage'),
+          title: const Text('Sign In'),
         ),
         body: SingleChildScrollView(
           child: Padding(
@@ -125,8 +125,7 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => MapGoogleScreen()),
+                            MaterialPageRoute(builder: (context) => ParisMap()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

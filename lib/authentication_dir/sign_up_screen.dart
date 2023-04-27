@@ -116,8 +116,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => MapGoogleScreen()),
+                            MaterialPageRoute(builder: (context) => ParisMap()),
                           );
                         },
                         style: ElevatedButton.styleFrom(
