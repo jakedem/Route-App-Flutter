@@ -125,7 +125,8 @@ class _SignInScreenState extends State<SignInScreen> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => ParisMap()),
+                            MaterialPageRoute(
+                                builder: (context) => MapGoogle()),
                           );
                         },
                         style: ElevatedButton.styleFrom(

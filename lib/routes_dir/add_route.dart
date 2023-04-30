@@ -150,7 +150,7 @@ class _AddRouteScreenState extends State<AddRouteScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  SizedBox(height: 200),
+                  SizedBox(height: 100),
                   Center(
                     child: ElevatedButton(
                       onPressed: () {
