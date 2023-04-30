@@ -115,6 +115,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
+                            // configurating the authenticaton of user details 
                           FirebaseAuth.instance
                               .createUserWithEmailAndPassword(
                                   email: _emailController.text,
