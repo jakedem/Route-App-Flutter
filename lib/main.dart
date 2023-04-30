@@ -21,10 +21,7 @@ class RouteApp extends StatefulWidget {
 class _RouteAppState extends State<RouteApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      
-      debugShowCheckedModeBanner: false,
-      home: MapGoogle()
-    );
+    return MaterialApp(debugShowCheckedModeBanner: false, 
+    home: SignInScreen());
   }
 }
