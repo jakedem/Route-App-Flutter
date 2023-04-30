@@ -33,7 +33,7 @@ A new Flutter project.
 
 #Technologies Used
 #The  daily route planner was built using the Flutter framework, which allows for cross-platform development of mobile apps. The app uses the Google Maps API to calculate the best route and display it on a map. It also uses the Geolocator package to get the user's current location and calculate distances.
-#The flutter was used for the frontend of this application
+#The flutter was used for the frontend of this application.
 #Firebase was used for the backend of this daily route planner application which includes the authorization, sign in and sign up databases.
 
 
