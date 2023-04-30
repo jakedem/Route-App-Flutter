@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:routeapp/authentication_dir/sign_in_screen.dart';
 import 'package:routeapp/routes_dir/add_route.dart';
@@ -114,11 +115,18 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     children: [
                       ElevatedButton(
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MapGoogle()),
-                          );
+                            // configurating the authenticaton of user details 
+                          FirebaseAuth.instance
+                              .createUserWithEmailAndPassword(
+                                  email: _emailController.text,
+                                  password: _passwordController.text)
+                              .then((value) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MapGoogle()),
+                            );
+                          }).onError((error, stackTrace) => null);
                         },
                         style: ElevatedButton.styleFrom(
                           elevation: 1,
