@@ -95,33 +95,36 @@ class _MapGoogleState extends State<MapGoogle> {
             ),
             Positioned(
               top: 70,
-              left: 30,
+              left: 0,
               right: 50,
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8.0),
                 child: Row(
                   children: [
-                    IconButton(
-                      icon: Icon(Icons.menu),
-                      iconSize: 35.0,
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          PageRouteBuilder(
-                            transitionDuration: Duration(milliseconds: 500),
-                            pageBuilder: (_, __, ___) => UserProfileScreen(),
-                            transitionsBuilder: (_, animation, __, child) {
-                              return SlideTransition(
-                                position: Tween(
-                                  begin: Offset(-1.0, 0.0),
-                                  end: Offset(0.0, 0.0),
-                                ).animate(animation),
-                                child: child,
-                              );
-                            },
-                          ),
-                        );
-                      },
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(0.0, 0, 12, 0),
+                      child: IconButton(
+                        icon: Icon(Icons.menu),
+                        iconSize: 35.0,
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            PageRouteBuilder(
+                              transitionDuration: Duration(milliseconds: 500),
+                              pageBuilder: (_, __, ___) => UserProfileScreen(),
+                              transitionsBuilder: (_, animation, __, child) {
+                                return SlideTransition(
+                                  position: Tween(
+                                    begin: Offset(-1.0, 0.0),
+                                    end: Offset(0.0, 0.0),
+                                  ).animate(animation),
+                                  child: child,
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     Expanded(
                       child: TextField(
