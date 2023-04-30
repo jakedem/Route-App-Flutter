@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:routeapp/routes_dir/map.dart';
+import 'package:routeapp/routes_dir/map.dart';
 import 'package:routeapp/authentication_dir/sign_up_screen.dart';
 import 'package:routeapp/routes_dir/map_google.dart';
 

@@ -5,6 +5,7 @@ import 'package:routeapp/routes_dir/location_service.dart';
 import 'package:routeapp/routes_dir/get_current_location.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:routeapp/routes_dir/add_route.dart';
+import 'package:routeapp/routes_dir/sidenav.dart';
 import 'package:routeapp/user_dir/user_profile.dart';
 
 class MapGoogle extends StatefulWidget {
@@ -79,6 +80,7 @@ class _MapGoogleState extends State<MapGoogle> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
+        drawer: Sidebar(),
         body: Stack(
           children: [
             GoogleMap(
