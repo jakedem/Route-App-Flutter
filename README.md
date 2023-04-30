@@ -21,7 +21,7 @@ A new Flutter project.
 #To use the app, follow these steps:
 
 #Open the app on your device.
-#Enter your email and password and click on sign in to  sign in into the app or you can sign up with any of your credentials.
+#Enter your email and password and click on sign in if you have already signed up else sign up with your full name, email and password if you are new to the app
 #Click on the "Create" button to add your events  for the day.
 #A pop up message will appear after clicking on the "create" button displaying that"For a better experience, turn on device location,which uses Google's location service ", you will click on "OK" to continue.
 #Enter the details of your event, including the name and destination.Your current location will automatically be provided by Google maps based on your current location.After that you click on "Save" to save your information that you have provided.
