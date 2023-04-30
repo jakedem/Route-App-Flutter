@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "981782030121",
+    "project_id": "route-mobile-app",
+    "storage_bucket": "route-mobile-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:981782030121:android:e2421e9412dbe95a6f7938",
+        "android_client_info": {
+          "package_name": "com.example.routeapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "981782030121-u4qlvfhk5opp2i01mila614805a7tidq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCI8TTJNsJPgFS3vtAVg6IFZRD_ft3foYo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "981782030121-u4qlvfhk5opp2i01mila614805a7tidq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
