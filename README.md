@@ -38,7 +38,7 @@ A new Flutter project.
 
 
 #Conclusion
-That's it! This is how the  daily route planner application works..
+That's it! This is how the  daily route planner application works.
 #Link to the git repository
 https://github.com/jakedem/Route-App-Flutter
 
